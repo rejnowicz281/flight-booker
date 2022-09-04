@@ -3,16 +3,23 @@
     <%= f.select(:arrival_airport, @airport_options) %>
     <%= f.select(:num_of_passengers, [1,2,3,4]) %>
     <%= f.select(:flight_date, @flights_dates) %>
-    <%= f.submit %>
+    <%= f.button "Search", class:"btn btn-primary", type:"submit"%>
 <% end %>
 
 <h2>Flights found:</h2>
-<ul>
-    <% @flights.each do |f| %>
-        <li>
-            <p> <%= f.start_datetime %> </p>
-            <p> <%= f.duration %> hours </p>
-            <p> From: <%= f.departure_airport.location %>, <%= f.departure_airport.code %>, <%= f.departure_airport_id%> </p>
-            <p> To: <%= f.arrival_airport.location %>, <%= f.arrival_airport.code %>, <%= f.arrival_airport_id %> </p>        </li>
-    <% end %>
-</ul>
+
+<%= form_with url: "/bookings/new", method: :get do |form| %>
+    <%= form.hidden_field :num_of_passengers, value: params[:num_of_passengers] %>
+    <ul>
+        <% @flights.each do |flight| %>
+            <li>
+                <%= form.radio_button "flight", flight.id %>
+                <p> <%= flight.start_datetime %> </p>
+                <p> <%= flight.duration %> hours </p>
+                <p> From: <%= flight.departure_airport.location %>, <%= flight.departure_airport.code %>, <%= flight.departure_airport_id%> </p>
+                <p> To: <%= flight.arrival_airport.location %>, <%= flight.arrival_airport.code %>, <%= flight.arrival_airport_id %> </p>
+            </li>
+        <% end %>
+    </ul>
+    <%= form.button "Continue", class:"btn btn-primary", type:"submit"%>
+<% end %>
