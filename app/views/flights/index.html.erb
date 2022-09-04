@@ -1,6 +1,6 @@
 <%= render "search_form", airport_options: @airport_options,
     flights_dates: @flights_dates %>
 
-<% unless @flights.empty? %>
+<% if params[:departure_airport].present? %>
     <%= render "flights_found", flights: @flights %>
 <% end %>
