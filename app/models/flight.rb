@@ -6,4 +6,12 @@ class Flight < ApplicationRecord
     foreign_key: "departure_airport_id",
     inverse_of: :departing_flights
   has_many :bookings
+
+  def departure_time
+    start_datetime.strftime("%H:%M")
+  end
+
+  def arrival_time
+    start_datetime.advance(hours: duration).strftime("%H:%M")
+  end
 end

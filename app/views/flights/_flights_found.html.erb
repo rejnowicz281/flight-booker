@@ -1,0 +1,16 @@
+<div class="flights-found">
+    <h2 class="text-center">Flights found:</h2>
+    
+    <%= form_with url: "/bookings/new", method: :get do |form| %>
+        <%= form.hidden_field :num_of_passengers, value: params[:num_of_passengers] %>
+        <% flights.each do |flight| %>
+            <div class="flight d-flex flex-row">
+                <%= form.radio_button "flight", flight.id %>
+                <%= render "flight", flight: flight %>
+            </div>
+        <% end %>
+        <div class="form-actions text-center">
+            <%= form.button "Continue", class:"btn btn-primary m-2", type:"submit"%>
+        </div>
+    <% end %>
+</div>

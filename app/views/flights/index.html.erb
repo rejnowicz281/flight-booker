@@ -1,25 +1,6 @@
-<%= form_with url: "/flights", method: :get do |f| %>
-    <%= f.select(:departure_airport, @airport_options) %>
-    <%= f.select(:arrival_airport, @airport_options) %>
-    <%= f.select(:num_of_passengers, [1,2,3,4]) %>
-    <%= f.select(:flight_date, @flights_dates) %>
-    <%= f.button "Search", class:"btn btn-primary", type:"submit"%>
-<% end %>
+<%= render "search_form", airport_options: @airport_options,
+    flights_dates: @flights_dates %>
 
-<h2>Flights found:</h2>
-
-<%= form_with url: "/bookings/new", method: :get do |form| %>
-    <%= form.hidden_field :num_of_passengers, value: params[:num_of_passengers] %>
-    <ul>
-        <% @flights.each do |flight| %>
-            <li>
-                <%= form.radio_button "flight", flight.id %>
-                <p> <%= flight.start_datetime %> </p>
-                <p> <%= flight.duration %> hours </p>
-                <p> From: <%= flight.departure_airport.location %>, <%= flight.departure_airport.code %>, <%= flight.departure_airport_id%> </p>
-                <p> To: <%= flight.arrival_airport.location %>, <%= flight.arrival_airport.code %>, <%= flight.arrival_airport_id %> </p>
-            </li>
-        <% end %>
-    </ul>
-    <%= form.button "Continue", class:"btn btn-primary", type:"submit"%>
+<% unless @flights.empty? %>
+    <%= render "flights_found", flights: @flights %>
 <% end %>

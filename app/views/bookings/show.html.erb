@@ -1,4 +1,5 @@
-<hr>
-flight id: <%= @booking.flight.id %>
-<hr>
-<%= @booking.passengers.each { |o| } %>
+<h1>Have a safe trip!</h1>
+<%= render "flights/flight", flight: @booking.flight %>
+<h2>Passengers:</h2>
+<%= render "passengers", passengers: @booking.passengers %>
+<%= link_to "Arrange a new trip", root_path, class: "btn btn-danger" %>

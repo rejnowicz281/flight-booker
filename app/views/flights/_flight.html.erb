@@ -1,0 +1,14 @@
+<ul class="flight-info list-group text-center m-2">
+    <li class="list-group-item">
+        <%= flight.departure_airport.location %>, <%= flight.departure_airport.code %> - <%= flight.arrival_airport.location %>, <%= flight.arrival_airport.code %>
+    </li>
+    <li class="list-group-item">
+        <%= flight.start_datetime %>
+    </li>
+    <li class="list-group-item">
+        <%= flight.duration %> hours
+    </li>
+    <li class="list-group-item">
+        <%= flight.departure_time %> - <%= flight.arrival_time %>
+    </li>
+</ul>

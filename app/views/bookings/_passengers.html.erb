@@ -1,0 +1,8 @@
+<ul class="passengers-info list-group m-2 w-50">
+    <% passengers.each do |passenger| %>
+        <li class="list-group-item">
+            <p class="text-muted"><%= passenger.email %></p>
+            <h4><%= passenger.name %></h4>
+        </li>
+    <% end %>
+</ul>
